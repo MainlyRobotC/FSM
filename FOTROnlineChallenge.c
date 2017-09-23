@@ -27,7 +27,22 @@ enum State
 	moveback2,
 	lowerBar1,
 	moveForward4,
-	moveback3
+	moveback3,
+	raiseBar1,
+	turn6,
+	moveForward5,
+	turn7,
+	moveForward6,
+	moveback4,
+	lowerBar2,
+	moveForward7,
+	moveback5,
+	liftBar3,
+	moveForward8,
+	moveback6,
+	turn8,
+	lowerBar3,
+	moveForward9
 };
 
 State currentState;
@@ -128,11 +143,11 @@ task main()
 	{
 		switch(currentState)
 		{
-		case turn1:
+		case turn1: //intake first ring
 			turn(moveback1, 1, 50, 90);
 			break;
 
-		case moveback1:
+		case moveback1: //setting up to score
 			degrees(liftBar1, 40, 50, 50);
 			break;
 
@@ -144,11 +159,11 @@ task main()
 			turn(moveForward1, 0, 50, 45);
 			break;
 
-		case moveForward1:
+		case moveForward1: //scoring
 			degrees(turn3, 250, 50, 50);
 			break;
 
-		case turn3:
+		case turn3: //moving to bonus post
 			turn(moveForward2, 0, 50, 90);
 			break;
 
@@ -165,7 +180,7 @@ task main()
 			break;
 
 		case liftBar2:
-			moveArm(turn5, 50, 100);
+			moveArm(turn5, 50, 120);
 			break;
 
 		case turn5:
@@ -173,15 +188,75 @@ task main()
 			break;
 
 		case moveback2:
-			degrees(lowerBar1, 200, -50, -50);
+			degrees(lowerBar1, 300, -50, -50);
 			break;
 
 		case lowerBar1:
-			moveArm(moveForward4, -50, 200);
+			moveArm(moveForward4, -50, 245);
 			break;
 
-		case moveForward4:
-			degrees(moveback3, 175, 50, 50);
+		case moveForward4: //intake ring from bonus post
+			degrees(moveback3, 350, 50, 50);
+			break;
+
+		case moveback3: //getting ring off post
+			degrees(raiseBar1, 100, -100, -100);
+			break;
+
+		case raiseBar1: //setting to score ring
+			moveArm(turn6, 50, 100);
+			break;
+
+		case turn6:
+			turn(moveForward5, 0, 50, 115);
+			break;
+
+		case moveForward5:
+			degrees(turn7, 725, 75, 75);
+			break;
+
+		case turn7:
+			turn(moveForward6, 0, 50, 65);
+			break;
+
+		case moveForward6: //scoring ring
+			degrees(moveBack4, 375, 50, 50);
+			break;
+
+		case moveback4: //setting to intake ring
+			degrees(lowerBar2, 500, -50, -50);
+			break;
+
+		case lowerBar2:
+			moveArm(moveForward7, -50, 160);
+			break;
+
+		case moveForward7: //intake ring
+			degrees(moveback5, 650, 100, 100);
+			break;
+
+		case moveback5:
+			degrees(liftBar3, 750, -50, -50);
+			break;
+
+		case liftBar3:
+			moveArm(moveForward8, 50, 400);
+			break;
+
+		case moveForward8: //score ring
+			degrees(moveback6, 800, 50, 50);
+			break;
+
+		case moveback6: //setting to intake second green ring
+			degrees(turn8, 250, -50, -50);
+			break;
+
+		case turn8:
+			turn(lowerBar3, 1, 50, 35);
+			break;
+
+		case lowerBar3:
+			moveArm(moveForward9, -50, 395);
 			break;
 		}
 	}
