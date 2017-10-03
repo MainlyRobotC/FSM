@@ -272,7 +272,7 @@ task main()
 			break;
 
 		case lowerBar3:
-			moveArm(moveForward9, -75, 410);
+			moveArm(moveForward9, -75, 398);
 			break;
 
 		case moveForward9:
