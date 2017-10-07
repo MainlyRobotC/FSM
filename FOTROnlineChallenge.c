@@ -328,15 +328,15 @@ task main()
 			break;
 
 		case moveforward13:
-			degrees(turn13, 1400, 75, 75);
+			degrees(turn13, 1300, 100, 100);
 			break;
 
 		case turn13:
-			turn(moveforward14, 0, 50, 90);
+			turn(moveforward14, 0, 100, 90);
 			break;
 
 		case moveforward14:
-			degrees(end, 350, 50, 50);
+			degrees(end, 350, 100, 100);
 			break;
 		}
 	}
