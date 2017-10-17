@@ -238,7 +238,7 @@ task main()
 			break;
 
 		case moveback4: //setting to intake first green ring
-			degrees(lowerBar2, 500, -75, -75);
+			degrees(lowerBar2, 300, -75, -75);
 			break;
 
 		case lowerBar2:
@@ -246,7 +246,7 @@ task main()
 			break;
 
 		case moveForward7: //intake ring
-			degrees(moveback5, 650, 100, 100);
+			degrees(moveback5, 450, 100, 100);
 			break;
 
 		case moveback5:
@@ -302,7 +302,7 @@ task main()
 			break;
 
 		case moveforward11:
-			degrees(turn11, 1250, 75, 75);
+			degrees(turn11, 1300, 75, 75);
 			break;
 
 		case turn11:
@@ -314,7 +314,7 @@ task main()
 			break;
 
 		case moveforward12:
-			degrees(moveback9, 2600, 100, 100); //know over left side of bonus tray
+			degrees(moveback9, 2600, 100, 100); //knock over left side of bonus tray
 			break;
 
 		case moveback9:
@@ -326,7 +326,7 @@ task main()
 			break;
 
 		case moveforward13:
-			degrees(turn13, 1200, 100, 100);
+			degrees(turn13, 1100, 100, 100);
 			break;
 
 		case turn13:
