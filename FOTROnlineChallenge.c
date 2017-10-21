@@ -69,7 +69,7 @@ void moveArm(State nextState, int power, int degrees) //function for moving the 
 	{
 		nMotorEncoder[arm] = 0;
 		motor[arm] = 0;
-		currentState = nextstate;
+		currentState = nextState;
 	}
 }
 
@@ -198,7 +198,7 @@ task main()
 			break;
 
 		case turn5:
-			turn(moveBack2, 0, 50, 90);
+			turn(moveback2, 0, 50, 90);
 			break;
 
 		case moveback2:
@@ -234,7 +234,7 @@ task main()
 			break;
 
 		case moveForward6: //scoring ring
-			degrees(moveBack4, 350, 75, 75);
+			degrees(moveback4, 350, 75, 75);
 			break;
 
 		case moveback4: //setting to intake first green ring
