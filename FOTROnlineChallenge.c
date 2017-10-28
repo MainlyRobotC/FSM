@@ -250,7 +250,7 @@ task main()
 			break;
 
 		case moveback5:
-			degrees(liftBar3, 750, -75, -75);
+			degrees(liftBar3, 350, -75, -75);
 			break;
 
 		case liftBar3:
@@ -258,7 +258,7 @@ task main()
 			break;
 
 		case moveForward8: //score ring
-			degrees(moveback6, 830, 50, 50);
+			degrees(moveback6, 430, 50, 50);
 			break;
 
 		case moveback6: //setting to intake second green ring
