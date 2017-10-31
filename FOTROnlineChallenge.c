@@ -338,6 +338,7 @@ task main()
 			break;
 
 			// FINAL SCORE: SHOULD BE 65, + OR -, 1 - 5
+			//Remember to add another green ring to score
 		}
 	}
 }
