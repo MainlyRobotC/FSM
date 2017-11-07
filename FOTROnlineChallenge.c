@@ -18,6 +18,16 @@ enum State //different moves
 	moveForward1,
 	turn3,
 	moveForward2,
+	exTurn1,
+	exArmL,
+	exForward1,
+	exBackward1,
+	exTurn2,
+	exArmU,
+	exForward2,
+	exBackward2,
+	exTurn3,
+	exForward3,
 	turn4,
 	moveForward3,
 	liftBar2,
@@ -182,9 +192,49 @@ task main()
 			break;
 
 		case moveForward2:
-			degrees(turn4, 1250, 75, 75);
+			degrees(exTurn1, 600, 75, 75);
 			break;
 
+		case exTurn1:
+			turn(exArmL, 1, 50, 90);
+			break;
+
+		case exArmL:
+			moveArm(exForward1, -75, 199);
+			break;
+
+		case exForward1:
+			degrees(exBackward1, 375, 75, 75);
+			break;
+
+		case exBackward1:
+			degrees(exTurn2, 375, -75, -75);
+			break;
+
+		case exTurn2:
+			turn(exArmU, 1, 50, 45);
+			break;
+
+		case exArmU:
+		lowerScore(exForward2);
+			break;
+
+		case exForward2:
+			degrees(exBackward2, 275, 50, 50);
+			break;
+
+		case exBackward2:
+			degrees(exTurn3, 270, -75, -75);
+			break;
+
+		case exTurn3:
+			turn(exForward3, 0, 50, 133);
+			break;
+
+		case exForward3:
+			degrees(turn4, 640, 75, 75);
+			break;
+		// second blue ring insert here _*_*_*_*_*_*_*_*_*_*_*_*_
 		case turn4:
 			turn(moveForward3, 1, 50, 45);
 			break;
@@ -222,7 +272,7 @@ task main()
 			break;
 
 		case turn6:
-			turn(moveForward5, 0, 50, 115);
+			turn(moveForward5, 0, 50, 120);
 			break;
 
 		case moveForward5:
@@ -234,7 +284,7 @@ task main()
 			break;
 
 		case moveForward6: //scoring ring
-			degrees(moveback4, 350, 75, 75);
+			degrees(moveback4, 380, 75, 75);
 			break;
 
 		case moveback4: //setting to intake first green ring
