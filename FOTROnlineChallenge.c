@@ -196,7 +196,7 @@ task main()
 			break;
 
 		case exTurn1:
-			turn(exArmL, 1, 50, 90);
+			turn(exArmL, 1, 50, 90);  //move to intske extra blue ring
 			break;
 
 		case exArmL:
@@ -204,7 +204,7 @@ task main()
 			break;
 
 		case exForward1:
-			degrees(exBackward1, 375, 75, 75);
+			degrees(exBackward1, 375, 75, 75); //intake extra blue ring
 			break;
 
 		case exBackward1:
@@ -220,7 +220,7 @@ task main()
 			break;
 
 		case exForward2:
-			degrees(exBackward2, 275, 50, 50);
+			degrees(exBackward2, 275, 50, 50); //outtake extra blue ring
 			break;
 
 		case exBackward2:
@@ -234,7 +234,7 @@ task main()
 		case exForward3:
 			degrees(turn4, 640, 75, 75);
 			break;
-		// second blue ring insert here _*_*_*_*_*_*_*_*_*_*_*_*_
+
 		case turn4:
 			turn(moveForward3, 1, 50, 45);
 			break;
@@ -272,11 +272,11 @@ task main()
 			break;
 
 		case turn6:
-			turn(moveForward5, 0, 50, 120);
+			turn(moveForward5, 0, 50, 115);
 			break;
 
 		case moveForward5:
-			degrees(turn7, 725, 75, 75);
+			degrees(turn7, 700, 75, 75);
 			break;
 
 		case turn7:
@@ -384,10 +384,10 @@ task main()
 			break;
 
 		case moveforward14:
-			degrees(end, 350, 100, 100); //knock over right side of bonus tray
+			degrees(end, 500, 100, 100); //knock over right side of bonus tray
 			break;
 
-			// FINAL SCORE: SHOULD BE 65, + OR -, 1 - 5
+			// FINAL SCORE: SHOULD BE 69, + OR -, 1 - 5
 			//Remember to add another green ring to score
 		}
 	}
