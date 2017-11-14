@@ -66,6 +66,10 @@ enum State //different moves
 	moveforward13,
 	turn13,
 	moveforward14,
+	moveback10,
+	turn14,
+	moveforward15,
+	moveback11,
 	end
 };
 
@@ -376,7 +380,7 @@ task main()
 			break;
 
 		case moveforward13:
-			degrees(turn13, 1100, 100, 100);
+			degrees(turn13, 1150, 100, 100);
 			break;
 
 		case turn13:
@@ -384,10 +388,26 @@ task main()
 			break;
 
 		case moveforward14:
-			degrees(end, 500, 100, 100); //knock over right side of bonus tray
+			degrees(moveback10, 500, 100, 100); //knock over right side of bonus tray
 			break;
 
-			// FINAL SCORE: SHOULD BE 69, + OR -, 1 - 5
+		case moveback10:
+			degrees(turn14, 600, -100, -100);
+			break;
+
+		case turn14:
+			turn(moveforward15, 0, 100, 90);
+			break;
+
+		case moveforward15:
+			degrees(moveback11, 200, 100, 100);
+			break;
+
+		case moveback11:
+			degrees(end, 1000, -100, -100);
+			break;
+
+			// FINAL SCORE: SHOULD BE 72, + OR -, 1 - 7
 			//Remember to add another green ring to score
 		}
 	}
