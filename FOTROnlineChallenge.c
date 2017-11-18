@@ -16,7 +16,9 @@ enum State //different moves
 	liftBar1,
 	turn2,
 	moveForward1,
+	exlowerArm,
 	turn3,
+	exraiseArm,
 	moveForward2,
 	exTurn1,
 	exArmL,
@@ -172,7 +174,7 @@ task main()
 		switch(currentState)
 		{
 		case turn1: //intake first blue ring
-			turn(moveback1, 1, 50, 90);
+			turn(moveback1, 1, 100, 90);
 			break;
 
 		case moveback1: //setting up to score
@@ -188,11 +190,19 @@ task main()
 			break;
 
 		case moveForward1: //scoring
-			degrees(turn3, 250, 70, 70);
+			degrees(exlowerArm, 250, 70, 70);
+			break;
+
+		case exlowerArm:
+			moveArm(turn3, -75, 75);
 			break;
 
 		case turn3: //moving to bonus post
-			turn(moveForward2, 0, 50, 90);
+			turn(exraiseArm, 0, 50, 90);
+			break;
+
+		case exraiseArm:
+			moveArm(moveForward2, 75, 75);
 			break;
 
 		case moveForward2:
@@ -208,15 +218,15 @@ task main()
 			break;
 
 		case exForward1:
-			degrees(exBackward1, 375, 75, 75); //intake extra blue ring
+			degrees(exBackward1, 450, 75, 75); //intake extra blue ring
 			break;
 
 		case exBackward1:
-			degrees(exTurn2, 375, -75, -75);
+			degrees(exTurn2, 450, -75, -75);
 			break;
 
 		case exTurn2:
-			turn(exArmU, 1, 50, 45);
+			turn(exArmU, 1, 50, 43);
 			break;
 
 		case exArmU:
@@ -232,7 +242,7 @@ task main()
 			break;
 
 		case exTurn3:
-			turn(exForward3, 0, 50, 133);
+			turn(exForward3, 0, 50, 131);
 			break;
 
 		case exForward3:
@@ -252,7 +262,7 @@ task main()
 			break;
 
 		case turn5:
-			turn(moveback2, 0, 50, 90);
+			turn(moveback2, 0, 50, 89);
 			break;
 
 		case moveback2:
@@ -288,7 +298,7 @@ task main()
 			break;
 
 		case moveForward6: //scoring ring
-			degrees(moveback4, 380, 75, 75);
+			degrees(moveback4, 420, 75, 75);
 			break;
 
 		case moveback4: //setting to intake first green ring
@@ -392,19 +402,19 @@ task main()
 			break;
 
 		case moveback10:
-			degrees(turn14, 600, -100, -100);
+			degrees(turn14, 1200, -100, -100);
 			break;
 
 		case turn14:
-			turn(moveforward15, 0, 100, 90);
+			turn(moveforward15, 1, 100, 90);
 			break;
 
 		case moveforward15:
-			degrees(moveback11, 200, 100, 100);
+			degrees(moveback11, 500, -100, -100);
 			break;
 
 		case moveback11:
-			degrees(end, 1000, -100, -100);
+			degrees(end, 1500, 100, 100);
 			break;
 
 			// FINAL SCORE: SHOULD BE 72, + OR -, 1 - 7
