@@ -294,7 +294,7 @@ task main()
 			break;
 
 		case turn7:
-			turn(moveForward6, 0, 50, 65);
+			turn(moveForward6, 0, 50, 67);
 			break;
 
 		case moveForward6: //scoring ring
