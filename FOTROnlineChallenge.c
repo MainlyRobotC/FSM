@@ -16,6 +16,7 @@ enum State //different moves
 	liftBar1,
 	turn2,
 	moveForward1,
+	rampUp1,
 	exlowerArm,
 	turn3,
 	exraiseArm,
@@ -77,6 +78,7 @@ enum State //different moves
 
 State currentState;
 int count = 0;
+bool ramp = false;
 
 void moveArm(State nextState, int power, int degrees) //function for moving the robot arm
 {
@@ -127,13 +129,14 @@ void upperScore(State nextState)
 	}
 }
 
-void degrees(State nextState, int degrees, int powerl, int powerr) //used to move a certain number of degrees
+void degrees(State nextState, int degrees, int direction) //used to move a certain number of degrees
 {
-	motor[motor1] = powerl;
-	motor[motor6] = powerr;
-	if(abs(nMotorEncoder[motor1]) >= degrees)
+	motor[motor1] = direction * (degrees + 20 - nMotorEncoder[motor1]);
+	motor[motor6] = direction * (degrees + 20 - nMotorEncoder[motor1]);
+	if(abs(nMotorEncoder[motor1]) >= degrees - 100)
 	{
 		nMotorEncoder[motor1] = 0;
+		nMotorEncoder[motor6] = 0;
 		motor[motor1] = 0;
 		motor[motor6] = 0;
 		currentState = nextState;
@@ -160,6 +163,23 @@ void turn(State nextState, int direction, int power, int turnAngle) // left turn
 		currentState = nextState;
 		resetGyro(gyro);
 		nMotorEncoder[motor1] = 0;
+		nMotorEncoder[motor6] = 0;
+	}
+}
+
+void rampUp( int direction) //should always be 110
+{
+	ramp = false;
+	motor[motor1] = direction * (nMotorEncoder[motor6] + 20);
+	motor[motor6] = direction * (nMotorEncoder[motor6] + 20);
+	if(motor[motor1] >= 100)
+	{
+		nMotorEncoder[motor6] = 0;
+		nMotorEncoder[motor1] = 0;
+		//motor[motor1] = 0;
+		//motor[motor6] = 0;
+		//currentState = nextState;
+		ramp = true;
 	}
 }
 
@@ -169,6 +189,7 @@ task main()
 	currentState = turn1;
 	nMotorEncoder[arm] = 0;
 	nMotorEncoder[motor1] = 0;
+	nMotorEncoder[motor6] = 0;
 	while(true)
 	{
 		switch(currentState)
@@ -178,7 +199,8 @@ task main()
 			break;
 
 		case moveback1: //setting up to score
-			degrees(liftBar1, 40, 75, 75);
+			rampUp(-1);
+			degrees(liftBar1, 40, -1);
 			break;
 
 		case liftBar1:
@@ -190,7 +212,8 @@ task main()
 			break;
 
 		case moveForward1: //scoring
-			degrees(exlowerArm, 250, 70, 70);
+			//rampUp(1);
+			degrees(exlowerArm, 250, 1);
 			break;
 
 		case exlowerArm:
@@ -206,7 +229,7 @@ task main()
 			break;
 
 		case moveForward2:
-			degrees(exTurn1, 600, 75, 75);
+			degrees(exTurn1, 600, 1);
 			break;
 
 		case exTurn1:
@@ -218,11 +241,11 @@ task main()
 			break;
 
 		case exForward1:
-			degrees(exBackward1, 450, 75, 75); //intake extra blue ring
+			degrees(exBackward1, 450, 1); //intake extra blue ring
 			break;
 
 		case exBackward1:
-			degrees(exTurn2, 450, -75, -75);
+			degrees(exTurn2, 450, -1);
 			break;
 
 		case exTurn2:
@@ -234,11 +257,12 @@ task main()
 			break;
 
 		case exForward2:
-			degrees(exBackward2, 275, 50, 50); //outtake extra blue ring
+			rampUp(1);
+			degrees(exBackward2, 275, 1); //outtake extra blue ring
 			break;
 
 		case exBackward2:
-			degrees(exTurn3, 270, -75, -75);
+			degrees(exTurn3, 270, -1);
 			break;
 
 		case exTurn3:
@@ -246,7 +270,8 @@ task main()
 			break;
 
 		case exForward3:
-			degrees(turn4, 640, 75, 75);
+			rampUp(1);
+			degrees(turn4, 640, 1);
 			break;
 
 		case turn4:
@@ -254,7 +279,8 @@ task main()
 			break;
 
 		case moveForward3:
-			degrees(liftBar2, 200, 75, 75);
+			rampUp(1);
+			degrees(liftBar2, 200, 1);
 			break;
 
 		case liftBar2:
@@ -266,7 +292,7 @@ task main()
 			break;
 
 		case moveback2:
-			degrees(lowerBar1, 300, -75, -75);
+			degrees(lowerBar1, 300, -1);
 			break;
 
 		case lowerBar1:
@@ -274,11 +300,12 @@ task main()
 			break;
 
 		case moveForward4: //intake blue ring from bonus post
-			degrees(moveback3, 350, 75, 75);
+			rampUp(1);
+			degrees(moveback3, 350, 1);
 			break;
 
 		case moveback3: //getting ring off post
-			degrees(raiseBar1, 50, -100, -100);
+			degrees(raiseBar1, 50, -1);
 			break;
 
 		case raiseBar1: //setting to score ring
@@ -290,7 +317,8 @@ task main()
 			break;
 
 		case moveForward5:
-			degrees(turn7, 700, 75, 75);
+			rampUp(1);
+			degrees(turn7, 700, 1);
 			break;
 
 		case turn7:
@@ -298,11 +326,12 @@ task main()
 			break;
 
 		case moveForward6: //scoring ring
-			degrees(moveback4, 420, 75, 75);
+			rampUp(1);
+			degrees(moveback4, 420, 1);
 			break;
 
 		case moveback4: //setting to intake first green ring
-			degrees(lowerBar2, 300, -75, -75);
+			degrees(lowerBar2, 300, -1);
 			break;
 
 		case lowerBar2:
@@ -310,11 +339,12 @@ task main()
 			break;
 
 		case moveForward7: //intake ring
-			degrees(moveback5, 450, 100, 100);
+			rampUp(1);
+			degrees(moveback5, 450, 1);
 			break;
 
 		case moveback5:
-			degrees(liftBar3, 350, -75, -75);
+			degrees(liftBar3, 350, -1);
 			break;
 
 		case liftBar3:
@@ -322,11 +352,12 @@ task main()
 			break;
 
 		case moveForward8: //score ring
-			degrees(moveback6, 430, 50, 50);
+			rampUp(1);
+			degrees(moveback6, 430, 1);
 			break;
 
 		case moveback6: //setting to intake second green ring
-			degrees(turn8, 250, -70, -70);
+			degrees(turn8, 250, -1);
 			break;
 
 		case turn8:
@@ -338,11 +369,12 @@ task main()
 			break;
 
 		case moveForward9:
-			degrees(moveback7, 500, 75, 75); //intake second green ring
+			rampUp(1);
+			degrees(moveback7, 500, 1); //intake second green ring
 			break;
 
 		case moveback7:
-			degrees(liftBar4, 150, -50, -50);
+			degrees(liftBar4, 150, -1);
 			break;
 
 		case liftBar4:
@@ -354,11 +386,12 @@ task main()
 			break;
 
 		case moveForward10:
-			degrees(moveback8, 75, 50, 50);// setting to knock over the bonus tray
+			rampUp(1);
+			degrees(moveback8, 75, 1);// setting to knock over the bonus tray
 			break;
 
 		case moveback8:
-			degrees(turn10, 150, -50, -50);
+			degrees(turn10, 150, -1);
 			break;
 
 		case turn10:
@@ -366,7 +399,8 @@ task main()
 			break;
 
 		case moveforward11:
-			degrees(turn11, 1300, 75, 75);
+			rampUp(1);
+			degrees(turn11, 1300, 1);
 			break;
 
 		case turn11:
@@ -378,11 +412,12 @@ task main()
 			break;
 
 		case moveforward12:
-			degrees(moveback9, 2600, 100, 100); //knock over left side of bonus tray
+			rampUp(1);
+			degrees(moveback9, 2600, 1); //knock over left side of bonus tray
 			break;
 
 		case moveback9:
-			degrees(turn12, 100, -50, -50); // setting to knock over right side of bonus tray
+			degrees(turn12, 100, -1); // setting to knock over right side of bonus tray
 			break;
 
 		case turn12:
@@ -390,7 +425,8 @@ task main()
 			break;
 
 		case moveforward13:
-			degrees(turn13, 1150, 100, 100);
+			rampUp(1);
+			degrees(turn13, 1150, 1);
 			break;
 
 		case turn13:
@@ -398,11 +434,12 @@ task main()
 			break;
 
 		case moveforward14:
-			degrees(moveback10, 500, 100, 100); //knock over right side of bonus tray
+			rampUp(1);
+			degrees(moveback10, 500, 1); //knock over right side of bonus tray
 			break;
 
 		case moveback10:
-			degrees(turn14, 1200, -100, -100);
+			degrees(turn14, 1200, -1);
 			break;
 
 		case turn14:
@@ -410,11 +447,12 @@ task main()
 			break;
 
 		case moveforward15:
-			degrees(moveback11, 500, -100, -100);
+			rampUp(1);
+			degrees(moveback11, 500, -1);
 			break;
 
 		case moveback11:
-			degrees(end, 1500, 100, 100);
+			degrees(end, 1500, 1);
 			break;
 
 			// FINAL SCORE: SHOULD BE 72, + OR -, 1 - 7

@@ -4,10 +4,23 @@
 
 enum State
 {
+	RampUpTest,
 	RampDownTest
 };
 
 State currentState;
+
+void rampUp() //should always be 110
+{
+	motor[motor1] = nMotorEncoder[motor6] + 20;
+	motor[motor6] = nMotorEncoder[motor6] + 20;
+	if(motor[motor1] > 100)
+	{
+		nMotorEncoder[motor1] = 0;
+		motor[motor1] = 0;
+		motor[motor6] = 0;
+	}
+}
 
 void rampDownMove(int degrees, int direction)
 {
@@ -23,13 +36,17 @@ void rampDownMove(int degrees, int direction)
 
 task main()
 {
-while(true)
+while(nMotorEncoder[motor1] < 1110)
 {
+	resetMotorEncoder(motor1);
 	switch(currentState)
 	{
+	case RampUpTest:
+		rampUp();
+		break;
 	case RampDownTest:
-	rampDownMove(1000, 1);
-	break;
+		rampDownMove(1000, 1);
+		break;
 }
 }
 
