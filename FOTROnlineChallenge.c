@@ -187,8 +187,8 @@ void turn(State nextState, int direction, int power, int turnAngle) // left turn
 void rampUp( int direction, State nextState)
 {
 	ramp = false;
-	motor[motor1] = direction * (nMotorEncoder[motor6] + 20);
-	motor[motor6] = direction * (nMotorEncoder[motor6] + 20);
+	motor[motor1] = direction * (abs(nMotorEncoder[motor6]) + 20);
+	motor[motor6] = direction * (abs(nMotorEncoder[motor6]) + 20);
 	if(motor[motor1] >= 100)
 	{
 		nMotorEncoder[motor6] = 0;
@@ -316,7 +316,7 @@ task main()
 			break;
 
 		case moveForward3:
-			degrees(liftBar2, 200, 1);
+			degrees(liftBar2, 160, 1);
 			break;
 
 		case liftBar2:
@@ -328,7 +328,7 @@ task main()
 			break;
 
 		case moveback2:
-			degrees(lowerBar1, 300, -1);
+			degrees(lowerBar1, 320, -1);
 			break;
 
 		case lowerBar1:
@@ -340,7 +340,7 @@ task main()
 			break;
 
 		case moveForward4: //intake blue ring from bonus post
-			degrees(moveback3, 350, 1);
+			degrees(moveback3, 160, 1);
 			break;
 
 		case moveback3: //getting ring off post
@@ -348,11 +348,11 @@ task main()
 			break;
 
 		case raiseBar1: //setting to score ring
-			moveArm(turn6, 75, 100);
+			moveArm(turn6, 150, 100);
 			break;
 
 		case turn6:
-			turn(ramp7, 0, 50, 115);
+			turn(ramp8, 0, 50, 115);
 			break;
 
 		case ramp8:
@@ -388,7 +388,7 @@ task main()
 			break;
 
 		case moveForward7: //intake ring
-			degrees(moveback5, 450, 1);
+			degrees(moveback5, 430, 1);
 			break;
 
 		case moveback5:
@@ -404,15 +404,15 @@ task main()
 			break;
 
 		case moveForward8: //score ring
-			degrees(moveback6, 430, 1);
+			degrees(moveback6, 260, 1);
 			break;
 
 		case moveback6: //setting to intake second green ring
-			degrees(turn8, 250, -1);
+			degrees(turn8, 300, -1);
 			break;
 
 		case turn8:
-			turn(lowerBar3, 1, 50, 40);
+			turn(lowerBar3, 1, 50, 36);
 			break;
 
 		case lowerBar3:
@@ -424,11 +424,11 @@ task main()
 			break;
 
 		case moveForward9:
-			degrees(moveback7, 500, 1); //intake second green ring
+			degrees(moveback7, 400, 1); //intake second green ring
 			break;
 
 		case moveback7:
-			degrees(liftBar4, 150, -1);
+			degrees(liftBar4, 300, -1);
 			break;
 
 		case liftBar4:
