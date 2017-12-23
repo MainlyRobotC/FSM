@@ -388,11 +388,11 @@ task main()
 			break;
 
 		case moveForward7: //intake ring
-			degrees(moveback5, 430, 1);
+			degrees(moveback5, 350, 1);
 			break;
 
 		case moveback5:
-			degrees(liftBar3, 350, -1);
+			degrees(liftBar3, 270, -1);
 			break;
 
 		case liftBar3:
@@ -436,7 +436,7 @@ task main()
 			break;
 
 		case turn9:
-			turn(ramp13, 0, 50, 75); //score second green ring
+			turn(ramp13, 0, 50, 50); //score second green ring
 			break;
 
 		case ramp13:
@@ -452,7 +452,7 @@ task main()
 			break;
 
 		case turn10:
-			turn(ramp14, 0, 50, 100);
+			turn(ramp14, 0, 50, 130);
 			break;
 
 		case ramp14:
@@ -464,7 +464,7 @@ task main()
 			break;
 
 		case turn11:
-			turn(lowerBar4, 1, 50, 45);
+			turn(lowerBar4, 1, 50, 50);
 			break;
 
 		case lowerBar4:
